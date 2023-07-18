@@ -1,0 +1,68 @@
+Como funciona
+Uma ramificação representa uma linha independente de desenvolvimento. As ramificações funcionam como uma abstração para o processo de edição/estágio/confirmação. Você pode pensar nelas como uma forma de solicitar um diretório de trabalho, uma área de staging e um histórico do projeto totalmente novos. Novas confirmações são registradas no histórico para a ramificação atual, que resulta em uma bifurcação na história do projeto.
+
+O comando git branch permite criar, listar, renomear e excluir ramificações. Ele não permite alternar entre as ramificações ou reunir um histórico bifurcado de novo. Por esse motivo, o comando git branch é muito integrado com os comandos git checkout e git merge.
+
+Opções comuns
+git branch
+Listar todas as ramificações no seu repositório. Isso é sinônimo de git branch --list.
+
+git branch <branch>
+Criar uma nova ramificação chamada . Isso não verifica a nova ramificação.
+
+git branch -d <branch>
+Excluir a ramificação especificada. Esta é uma operação “segura” em que o Git impede que você exclua a ramificação se tiver mudanças não mescladas.
+
+git branch -D <branch>
+Forçar a exclusão da ramificação especificada, mesmo que ela tenha mudanças não mescladas. Este é o comando a ser usado se você quiser excluir de modo permanente todas as confirmações associadas a uma linha particular de desenvolvimento.
+
+git branch -m <branch>
+Renomear a ramificação atual para .
+
+git branch -a
+Listar todas as ramificações remotas.
+
+Como criar ramificações
+É importante entender que as ramificações são apenas indicadores para confirmações. Quando você cria uma ramificação, tudo o que o Git precisa fazer é criar um novo indicador, ele não muda o repositório de nenhuma outra maneira. Se você começar com um repositório que seja parecido com o seguinte:
+
+Tutorial do Git: repositório sem nenhuma ramificação
+Em seguida, você cria uma ramificação usando o comando a seguir:
+
+git branch crazy-experiment
+A história do repositório permanece inalterada. Tudo o que você tem é um novo indicador para a confirmação atual:
+
+Tutorial do Git: Criar nova ramificação
+Observe que isso apenas cria a nova ramificação. Para começar a adicionar confirmações a ela, é necessário selecionar com git checkout e, em seguida, usar os comandos git add e git commit padrão.
+
+Como criar ramificações remotas
+Até agora, todos esses exemplos demonstraram operações de ramificação local. O comando git branch também funciona em ramificações remotas. Para operar em ramificações remotas, um repositório remoto deve ser configurado primeiro e adicionado à configuração do repositório local.
+
+$ git remote add new-remote-repo https://bitbucket.com/user/repo.git
+# Add remote repo to local repo config
+$ git push <new-remote-repo> crazy-experiment~
+# pushes the crazy-experiment branch to new-remote-repo
+Este comando vai enviar uma cópia da ramificação local crazy-experiment para o repositório remoto .
+
+Como excluir ramificações
+Depois que terminar de trabalhar em uma ramificação e tiver feito a mesclagem dela com a base de código principal, você está livre para excluir a ramificação sem perder nenhuma história:
+
+git branch -d crazy-experiment
+No entanto, se a ramificação não tiver sido mesclada, o comando acima enviará uma mensagem de erro:
+
+erro: a ramificação "crazy-experiment" não está totalmente mesclada. Se tiver certeza de que quer excluir, execute 'git branch -D crazy-experiment'.
+Isso impede que você perca o acesso a toda a linha de desenvolvimento. Se você quiser mesmo excluir a ramificação (por exemplo, caso seja um experimento que falhou), pode usar o marcador-D em maiúscula:
+
+git branch -D crazy-experiment
+Isso exclui a ramificação independentemente de seu status e sem avisos, portanto, use com critério.
+
+Os comandos anteriores excluirão uma cópia local de uma ramificação. A ramificação ainda pode existir nos repositórios remotos. Para excluir uma ramificação remota, execute o seguinte.
+
+git push origin --delete crazy-experiment
+Ou
+
+git push origin :crazy-experiment
+Isso vai enviar um sinal de exclusão para o repositório de origem remota que aciona uma exclusão da ramificação remota crazy-experiment.
+
+Resumo
+
+Neste documento, discutimos o comportamento da ramificação do Git e o comando git branch. As funções principais dos comandos git branch são criar, listar, renomear e excluir ramificações. Para operar melhor nas ramificações resultantes, o comando em geral é usado com outros comandos, como git checkout. Saiba mais sobre as operações de ramificação git checkout, como alternar e fazer merge das ramificações, na página do git checkout.

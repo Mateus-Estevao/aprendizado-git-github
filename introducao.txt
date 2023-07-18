@@ -1,0 +1,203 @@
+O Git é um sistema de controlo de versões, distribuído e de código aberto. Ora, isto são muitas palavras para definir o Git.
+
+Vamos decompor esta definição complexa e explicar cada um dos conceitos:
+
+Sistema de controlo: isto significa que o Git é, basicamente, um tracker de conteúdo. Portanto, o Git pode ser usado para guardar conteúdo – É usado, principalmente, para armazenar código, devido às outras funcionalidades que disponibiliza.
+Sistema de controlo de versões: O código que é guardado no Git está em constante mutação à medida que novo código é adicionado. Além disso, muitos programadores podem adicionar código em paralelo. O sistema de controlo de versões, ajuda a gerir tudo isto, mantendo um histórico das alterações que foram realizadas. Adicionalmente, o Git disponibiliza funcionalidades como branches e merges, que explicaremos mais tarde.
+Sistema distribuído de controlo de versões : O Git tem um repositório remoto que está alojado em um servidor e um repositório local que está alojado no computador de cada programador. Isto significa que o código não está apenas guardado num servidor central, mas também existe uma cópia integral em todos os computadores dos programadores. Assim, o Git é um sistema distribuído de controlo de versões porque está presente no computador de cada programador. Explicaremos o conceito de repositórios remotos e locais, posteriormente, neste artigo.
+Por que precisamos de um Sistema de Controlo de Versões como o Git
+Os projetos na vida real implicam a colaboração em paralelo de vários programadores. Por isso, é necessário um sistema de controlo de versões, como o Git, para garantir que não existem conflitos entre o código desenvolvido por diferentes pessoas.
+
+Adicionalmente, os requisitos destes projectos são alterados com muita frequência. Um sistema de controlo de versões permite que os programadores possam reverter alterações e voltar a uma versão anterior do código.
+
+Finalmente, por vezes, existem projetos que estão a decorrer em paralelo e que partilham o mesmo código base. Nestes casos, o conceito de criação de branches do Git é muito importante.
+
+Agora, vamos começar a usar o Git.
+Em vez de abordarmos os conceitos todos de uma só vez, vamos explicar cada um deles, através de um exemplo, para um entendimento mais fácil.
+
+Download do Git
+
+Esta ligação tem as instruções para instalação do Git em diversos sistemas operativos:
+https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+
+Verifica que o Git está instalado, usando a seguinte instrução através da linha de comandos:
+
+git --version
+Criar o repositório local do Git
+No teu computador, cria uma pasta para o teu projecto. Vamos dar-lhe o nome  simple-git-demo.
+
+Entra na tua pasta do projecto e adiciona um repositório local do Git através dos seguintes comandos:
+
+cd simple-git-demo
+git init
+O comandogit init adiciona um repositório local do Git ao teu projecto.
+
+Agora, vamos adicionar algum código simples.
+
+Agora vamos adicionar algum código
+Cria um ficheiro com o nome demo.txt na pasta de projecto e adiciona-lhe o seguinte texto:
+
+Initial Content
+Aqui, vamos usar texto simples em vez de código, uma vez que o foco do artigo é o Sistema Git e não uma linguagem de programação específica.
+
+Staging e committing do código.
+Committing é o processo através do qual o código é adicionado ao repositório local. Antes de ser possível realizar o commit do código, ele tem de estar na área de staging. A área de staging existe para registar todas as alterações realizadas aos ficheiros e que serão posteriormente alvo de commit.
+
+Qualquer ficheiro que não seja adicionado à área de staging, não poderá ser alvo de commit. Isso permite que o programador tenha controlo sobre quais os ficheiros que necessitam de ser alvo de commit.
+
+Staging
+Usa o seguinte commando para realizar o staging do ficheiro:
+
+git add demo.txt
+Caso pretendas realizar o staging de vários ficheiros, podes usar:
+
+git add file1 file2 file3
+
+Se quiseres adicionar, todos os ficheiros dentro da pasta de projecto, na área de staging, podes usar o seguinte comando:
+
+git add .
+Usa este comando com cuidado, porque ele adiciona, à área de staging, todos os ficheiros e pastas existentes no teu projecto.
+
+Committing
+Para realizar o commit do ficheiro, usa o seguinte comando:
+
+git commit -m "Initial Commit"
+"Initial Commit" é a mensagem de commit inicial. Deves sempre criar uma mensagem de commit que seja relevante e indicativa das alterações ao código que foram realizadas em cada commit.
+
+Git Status e Git Log
+Agora, vamos modificar o ficheiro demo.txt e adicionar o seguinte texto:
+
+Initial Content Adding more Content
+Status
+Usa o comando git status para descobrires informação sobre que ficheiros foram modificados e quais estão na área de staging – é também apresentada informação adicional, que pode ser ignorada para já.
+
+Usa o seguinte comando para veres o status:
+
+git status
+O status mostra que o ficheiro demo.txt foi modificado e ainda não está na área de staging.
+
+Agora, vamos adicionar o ficheiro demo.txt para a área de staging e fazer o commit usando os seguintes comandos:
+
+git add demo.txt git commit -m "demo.txt file is modified"
+Log
+Usa o comandogit log para obteres uma impressão de todos os commits realizados até ao momento.
+
+O comando usado é: git log
+
+O log mostra quem foi o autor, a data e a mensagem de cada commit
+
+Branches
+Até agora, não criamos branches no Git. Por definição, o Git realiza os commits na branch master.
+
+O que é uma branch
+Uma branch não é mais do que um ponteiro para o último commit no repositório Git. Portanto, actualmente, a nossa master branch é um ponteiro para o segundo commit  “demo.txt file is modified”.
+
+Por que são necessárias várias branches?
+As branches são necessárias para suportar vários desenvolvimentos em paralelo. No diagrama apresentado de seguida, temos uma representação do funcionamento das branches.
+
+sww3mboJ61C4kpLWlQYHnHWvrjX8p--VMui2
+Inicialmente, o commit 1 e o commit 2 são realizados na branch master. Depois do commit 2, é criada uma branch com o nome "Test". O commit 3 e o commit 4 são adicionados à branch Test.
+
+Ao mesmo tempo, outros commits,  commit 3 e commit 4 são adicionados à branch master. Aqui, conseguimos ver que, após o commit 2, estão a ser realizados dois desenvolvimentos em paralelo, em duas branches separadas.
+
+A branch Test e a branch Master divergiram neste ponto e têm códigos diferentes – o código da branch Test pode ser mesclado (do inglês, merged) com a branch Master usando o comando git merge. Posteriormente, falaremos desse processo.
+
+Criar uma branch no repositório local.
+Cria uma branch chamada test usando o seguinte comando:
+
+git branch test
+Este comando cria a branch test.
+
+Ainda estamos no contexto da branch master. Para mudarmos para a branch test, usamos o seguinte comando:
+
+git checkout test
+Agora estamos na branch test.
+
+Podes obter uma lista de todas as branches existentes no repositório local usando o seguinte comando:
+
+git branch
+Executa alguns commits na nova branch
+Modifica demo.txt adicionando o seguinte código:
+
+Initial Content Adding more Content Adding some Content from test Branch
+Agora executa o stage e o commit com os seguintes comandos:
+
+git add demo.txt git commit -m "Test Branch Commit"
+Este commit foi realizado na branch Test. Agora, a branch Test está avançada em relação à branch Master em 1 commit  — porque a branch Test também possui 2 commits da branch master.
+
+Podes verificar o histórico de commits da branch Test com o comando:
+
+git log
+Merging
+Neste momento, a branch Test está avançada em 1 commit em relação à branch Master. Vamos supor que agora precisamos que todo o código da branch Test seja colocado na branch Master. Esta é a situação em que o comando git merge é muito útil.
+
+Para conseguirmos fazer o merge do código da branch test na branch master, basta seguir os seguintes passos:
+
+Primeiro, voltar à branch master:
+
+git checkout master
+Depois, executar o comando merge:
+
+git merge test
+Depois de executar esses 2 comandos, o merge deverá estar concluído com sucesso. Neste exemplo, não existem conflitos.
+
+Em projectos reais, contudo, é possível que existam conflitos quando se executa um merge. Para resolver estes conflitos, é necessária alguma experiência, algo que adquirirás à medida que a tua familiarização e que o tempo de trabalho com o Git aumente.
+
+Agora, corre o comando git log e vais reparar que a branch master também possui 3 commits.
+
+O repositório remoto do Git
+Até agora, temos estado a trabalhar apenas no repositório local. Cada programador trabalhará no seu repositório local, mas, eventualmente, terão a necessidade de fazer push do seu código para o repositório remoto. Assim que o código estiver no repositório remoto, outros programadores serão capazes de ver e modificar esse código.
+
+O-6UdGYVsEjM-oJmtJ5KQpQnXIBOCZoB22X1
+Representação de repositório remoto e repositórios locais
+GitHub
+Aqui, vamos passar a usar o GitHub para o repositório remoto.
+
+Navega para o link: https://github.com/ e cria uma conta.
+
+Depois do registo na homepage do GitHub, clica em Start a Project para criares um repositório Git. Dá um nome ao repositório e clica em "Create Repository"
+
+Dá um nome como git-blog-demo.
+
+Isto vai criar um repositório remoto no Github e, quando abrires o repositório, será aberta uma página idêntica à apresentada abaixo:
+
+LWpWCg5LTo7m-IkZW1io-194VWZ61di5CIGY
+O URL do repositório é o texto destacado em cima.
+
+https://github.com/aditya-sridhar/git-blog-demo.git
+
+Para apontares o teu repositório local para o repositório remoto, usa este comando:
+
+git remote add origin [url do repositório]
+Git Push
+Para fazermos push de todo o código do repositório local para o repositório remoto, usamos o seguinte comando:
+
+git push -u origin master
+Este comando realiza o push (actualização) do código da branch master no repositório local para a branch master do repositório remoto.
+
+Comandos adicionais
+Git Pull
+git pull é usado para fazer pull das últimas alterações no repositório remoto para o teu repositório local. O código do repositório remoto é constantemente atualizado por vários programadores. Isso justifica a necessidade do comando git pull :
+
+git pull origin master
+Git Clone
+git clone é usado para clonar um repositório remoto, já existente, para o teu computador. O comando a usar é:
+
+git clone [repository url]
+Parabéns
+Agora que conheces os conceitos básicos necessários para usar o Git, aventura-te e explora mais!
+
+Em breve, publicarei um novo artigo sobre conceitos um pouco mais avançados do Git. Mantém-te atento!
+
+Sobre o autor
+O autor adora tecnologia e segue atentamente todos os avanços. Ele também gosta de ajudar os outros com o seu conhecimento na área tecnológica.
+
+Conecte-se ao autor em sua conta do LinkedIn
+
+Também é possível seguir o autor no Twitter
+
+Site do autor
+
+Outras publicações do autor (em inglês)
+How to use Git efficiently
+
